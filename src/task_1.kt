@@ -23,7 +23,6 @@ fun List<Int>.sliceAndSum(evenOddFilter: Boolean = false, even:Boolean = false, 
 
             .also {
                 val last = it.lastIndex
-                println(last)
                 range = (if(fst in 0..last) fst else 0)..if(lst in 0..last) lst else last
 
             }
