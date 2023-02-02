@@ -8,25 +8,49 @@ data class Person(val name: String, val surname: String, val age: Int){
 // Функции-расширения
 // Сортировка по возрасту:
 fun List<Person>.sortByAge(descending:Boolean = false): List<Person>{
-    if(!descending) return this.sortedBy{it.age}
-    return this.sortedByDescending { it.age }
+    val sortedList = this.sortedWith(compareBy { it.age })
+    return if(!descending) sortedList
+    else sortedList.asReversed()
 }
+
 // Сортировка по имени:
-fun List<Person>.sortByName() = this.sortedBy { it.name + it.surname }
+fun List<Person>.sortByName(reversed:Boolean = false): List<Person> {
+
+    //val sortedByName = this.sortedWith(compareBy { it.name })
+    val sortedList = this.sortedWith(compareBy({it.name}, {it.surname}))
+    return if(!reversed) sortedList
+    else sortedList.asReversed()
+}
 
 fun main() {
     test()
 }
 
-private val persons = mutableListOf<Person>()
+private val persons = mutableListOf<Person>(
+    Person("Петя", "Пупкин", 22),
+    Person("Маша","Шушина", 28),
+    Person("Вася","Масясин",34 ),
+    Person("Маша","Растеряша",21),
+    Person("Петя","Велосипедин",55),
+    Person("Вася","Васин",32),
+    Person("Коля","Простоколя",60)
+)
 
 //Тестовые методы для проверки.
 fun test(){
-    addNewPerson()
+    //addNewPerson()
+    println()
     println("Sorted by age:")
+    persons.sortByAge().map { it.showPersonInfo() }
+    println()
+    println("Sorted by age (descending):")
     persons.sortByAge(true).map { it.showPersonInfo() }
     println()
+    println("Sorted by name")
     persons.sortByName().map { it.showPersonInfo() }
+    println()
+    println("Sorted by name (reversed)")
+    persons.sortByName(true).map { it.showPersonInfo() }
 
 }
 private fun addNewPerson(){

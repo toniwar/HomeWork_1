@@ -1,5 +1,4 @@
 
-import kotlin.system.measureTimeMillis
 
 fun main() {
     println("The operation took ${theMostImportantFunction(myQuestion)} ms")
@@ -10,7 +9,8 @@ private val myQuestion = { question: String ->
     println("Deep Thought! Give an answer to the question: $question")
     if(question == ultimateQuestion) {
         println("I need to think about it...")
-        Thread.sleep(7500)
+        val timeForReflection = (1000..4000).random()
+        Thread.sleep(timeForReflection.toLong())
         println("42")
     }
     else println("Sorry! I don't know")
@@ -18,6 +18,9 @@ private val myQuestion = { question: String ->
 }
 
 private fun theMostImportantFunction(answer: (question: String) -> Unit, question: String = ultimateQuestion): Long {
-    return measureTimeMillis { answer(question) }
+    //return measureTimeMillis { answer(question) }
+    val startTime = System.currentTimeMillis()
+    answer(question)
+    return System.currentTimeMillis() - startTime
 
 }
