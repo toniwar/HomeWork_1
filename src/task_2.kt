@@ -5,6 +5,7 @@ data class Person(val name: String, val surname: String, val age: Int){
     }
 
 }
+// Функции-расширения
 // Сортировка по возрасту:
 fun List<Person>.sortByAge(descending:Boolean = false): List<Person>{
     if(!descending) return this.sortedBy{it.age}
@@ -18,6 +19,8 @@ fun main() {
 }
 
 private val persons = mutableListOf<Person>()
+
+//Тестовые методы для проверки.
 fun test(){
     addNewPerson()
     println("Sorted by age:")
