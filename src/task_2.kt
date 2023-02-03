@@ -5,7 +5,7 @@ data class Person(val name: String, val surname: String, val age: Int){
     }
 
 }
-// Сортировка по возрасту в порядке убывания:
+// Сортировка по возрасту:
 fun List<Person>.sortByAge(descending:Boolean = false): List<Person>{
     if(!descending) return this.sortedBy{it.age}
     return this.sortedByDescending { it.age }
